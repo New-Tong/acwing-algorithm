@@ -1,7 +1,8 @@
 package 数据结构.栈.模拟栈;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * @Author NewTong
@@ -12,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         while (n-- > 0) {
             String str = scanner.next();
             if ("push".equals(str)) {
