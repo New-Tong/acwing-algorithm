@@ -21,18 +21,36 @@ public class Main {
             if (str[0].equals("I")) {
                 insert(str[1]);
             } else if (str[0].equals("Q")) {
-                query(str[1]);
+                printWriter.println(query(str[1]));
             }
         }
-        printWriter.write(n);
         printWriter.flush();
         printWriter.close();
         bufferedReader.close();
     }
 
     public static void insert(String string) {
+        int p = 0;
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (son[p][c - 'a'] == 0) {
+                son[p][c - 'a'] = ++idx;
+            }
+            p = son[p][c - 'a'];
+        }
+        cnt[p]++;
     }
 
-    public static void query(String string) {
+    public static int query(String string) {
+        int p = 0;
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (son[p][c - 'a'] == 0) {
+                return 0;
+            } else {
+                p = son[p][c - 'a'];
+            }
+        }
+        return cnt[p];
     }
 }
