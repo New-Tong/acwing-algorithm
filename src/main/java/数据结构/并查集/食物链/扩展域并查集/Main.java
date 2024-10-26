@@ -24,30 +24,32 @@ class Main {
         int k = array[1];
         int res = 0;
         while (k-- > 0) {
-            int[] as = Arrays.stream(bufferedReader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int type = as[0];
-            int x = as[1];
-            int y = as[2];
+            int[] array1 = Arrays.stream(bufferedReader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            int type = array1[0];
+            int x = array1[1];
+            int y = array1[2];
             if (x > n || y > n) res++;
             else {
                 if (type == 1) {
-                    if (find(x) == find(y + n) || find(x) == find(y + n + n)) res++;
-                    else {
+                    if (find(x) == find(y + n) || find(x) == find(y + n + n)) {
+                        res++;
+                    } else {
                         merge(x, y);
                         merge(x + n, y + n);
                         merge(x + n + n, y + n + n);
                     }
                 } else if (type == 2) {
-                    if (x == y || find(x) == find(y) || find(x) == find(y + n)) res++;
-                    else {
-                        merge(x, y + n + n);
+                    if (x == y || find(x) == find(y) || find(x + n + n) == find(y) || find(x) == find(y + n)) {
+                        res++;
+                    } else {
                         merge(x + n, y);
                         merge(x + n + n, y + n);
+                        merge(x, y + n + n);
                     }
                 }
             }
-
         }
+
         printWriter.println(res);
 
         printWriter.flush();
@@ -55,14 +57,14 @@ class Main {
         printWriter.close();
     }
 
+    public static void merge(int x, int y) {
+        p[find(x)] = find(y);
+    }
+
     public static int find(int x) {
         if (x != p[x]) {
             p[x] = find(p[x]);
         }
         return p[x];
-    }
-
-    public static void merge(int x, int y) {
-        p[find(x)] = find(y);
     }
 }
