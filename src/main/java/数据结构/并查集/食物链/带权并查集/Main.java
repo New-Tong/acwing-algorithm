@@ -1,4 +1,4 @@
-package 数据结构.并查集.食物链;
+package 数据结构.并查集.食物链.带权并查集;
 
 import java.io.*;
 import java.util.Arrays;
