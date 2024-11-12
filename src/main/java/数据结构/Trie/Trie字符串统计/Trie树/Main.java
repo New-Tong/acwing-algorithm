@@ -17,39 +17,38 @@ public class Main {
         PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(bufferedReader.readLine().split(" ")[0]);
         while (n-- > 0) {
-            String[] str = bufferedReader.readLine().split(" ");
-            if (str[0].equals("I")) {
-                insert(str[1]);
-            } else if (str[0].equals("Q")) {
-                printWriter.println(query(str[1]));
+            String[] strings = bufferedReader.readLine().split(" ");
+            if (strings[0].equals("I")) {
+                insert(strings[1]);
+            } else {
+                printWriter.write(query(strings[1]) + "\n");
             }
         }
         printWriter.flush();
-        printWriter.close();
         bufferedReader.close();
+        printWriter.close();
     }
 
-    public static void insert(String string) {
+    static void insert(String s) {
         int p = 0;
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            if (son[p][c - 'a'] == 0) {
-                son[p][c - 'a'] = ++idx;
+        char[] charArray = s.toCharArray();
+        for (char c : charArray) {
+            int u = c - 'a';
+            if (son[p][u] == 0) {
+                son[p][u] = ++idx;
             }
-            p = son[p][c - 'a'];
+            p = son[p][u];
         }
         cnt[p]++;
     }
 
-    public static int query(String string) {
+    static int query(String s) {
         int p = 0;
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            if (son[p][c - 'a'] == 0) {
-                return 0;
-            } else {
-                p = son[p][c - 'a'];
-            }
+        char[] charArray = s.toCharArray();
+        for (char c : charArray) {
+            int u = c - 'a';
+            if (son[p][u] == 0) return 0;
+            p = son[p][u];
         }
         return cnt[p];
     }

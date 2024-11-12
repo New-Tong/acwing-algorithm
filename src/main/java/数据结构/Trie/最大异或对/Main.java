@@ -6,6 +6,7 @@ import java.util.Arrays;
 class Main {
 
     static int N = 100010, idx = 0, M = 31 * N;
+    
     static int[][] son = new int[M][2];
 
     public static void main(String[] args) throws IOException {
