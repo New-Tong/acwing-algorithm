@@ -7,46 +7,42 @@ import java.util.Comparator;
 class Main {
     static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(System.out));
-    static int n, m, res = 0;
+    static int n, m, res;
     static final int N = 100010;
-    static Edge[] edges;
     static int[] p = new int[N];
+    static Edge[] edges;
 
-    public static class Edge {
+    static class Edge {
         int a, b, w;
 
-        public Edge(int a, int b, int c) {
+        public Edge(int a, int b, int w) {
             this.a = a;
             this.b = b;
-            this.w = c;
+            this.w = w;
         }
     }
 
-    // 找a所在集合的根节点
-    static int find(int a) {
-        if (a != p[a]) p[a] = find(p[a]);
-        return p[a];
-    }
-
-    public static boolean kruskal() {
-        // 从小到大依次遍历所有边
+    static boolean kruskal() {
         for (int i = 0; i < edges.length; i++) {
-            int a = edges[i].a;
-            int b = edges[i].b;
-            int w = edges[i].w;
-            // 判断a, b是不是在同个集合中，如果不是，那么连通a和b
+            Edge e = edges[i];
+            int a = e.a, b = e.b, w = e.w;
+            // 如果a和b不在一个集合中，那么把两个添加到同一个集合中
             if (find(a) != find(b)) {
                 p[find(a)] = find(b);
                 res += w;
             }
         }
 
-        // 判断是不是所有点都在集合中
         int t = find(1);
         for (int i = 2; i <= n; i++) {
             if (find(i) != t) return false;
         }
         return true;
+    }
+
+    public static int find(int a) {
+        if (a != p[a]) p[a] = find(p[a]);
+        return p[a];
     }
 
     public static void main(String[] args) throws IOException {
@@ -59,13 +55,13 @@ class Main {
         edges = new Edge[m];
         for (int i = 0; i < m; i++) {
             int[] tmp = Arrays.stream(bufferedReader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int a = tmp[0], b = tmp[1], c = tmp[2];
-            edges[i] = new Edge(a, b, c);
+            int a = tmp[0], b = tmp[1], w = tmp[2];
+            edges[i] = new Edge(a, b, w);
         }
         Arrays.sort(edges, Comparator.comparingInt(o -> o.w));
-
         if (kruskal()) printWriter.println(res);
         else printWriter.println("impossible");
+
         printWriter.flush();
         bufferedReader.close();
         printWriter.close();
