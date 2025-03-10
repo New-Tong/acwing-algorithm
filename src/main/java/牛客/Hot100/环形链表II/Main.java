@@ -40,7 +40,14 @@ public class Main {
             cur = cur.next;
         }
         ListNode cycleNode = detectCycle(head.next);
-
+        if (cycleNode != null) {
+            printWriter.println(cycleNode.val);
+        } else {
+            printWriter.println("null");
+        }
+        printWriter.flush();
+        printWriter.close();
+        bufferedReader.close();
     }
 
     public static ListNode detectCycle(ListNode head) {
