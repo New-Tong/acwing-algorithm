@@ -1,4 +1,4 @@
-package 牛客.合并区间;
+package 牛客.Hot100.合并区间;
 
 import java.io.*;
 import java.util.ArrayList;
