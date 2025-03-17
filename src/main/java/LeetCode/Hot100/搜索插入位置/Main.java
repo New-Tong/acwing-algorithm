@@ -10,16 +10,14 @@ public class Main {
 
     }
 
+    // 在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+    // 即找到第一个大于等于target的下标位置，左边小于target，右边大于等于target
     public int searchInsert(int[] nums, int target) {
         int left = -1, right = nums.length;
-        // 找到第一个大于等于target的索引位置，左边是小于target的索引位置，右边是大于等于target的索引位置，最终取right
-        while (left + 1 != right) {
+        while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (nums[mid] >= target) {
-                right = mid;
-            } else {
-                left = mid;
-            }
+            if (nums[mid] >= target) right = mid;
+            else left = mid;
         }
         return right;
     }
