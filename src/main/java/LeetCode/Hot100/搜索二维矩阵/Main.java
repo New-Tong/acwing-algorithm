@@ -14,24 +14,23 @@ public class Main {
         // 构造成一个升序数组
         int n = matrix.length;
         int m = matrix[0].length;
-        int[] arr = new int[n * m];
+        int[] nums = new int[n * m];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                arr[i * m + j] = matrix[i][j];
-            }
+            System.arraycopy(matrix[i], 0, nums, i * m, m);
         }
-        return binarySearch(arr, target);
+        return binarySearch(nums, target);
     }
 
-    public boolean binarySearch(int[] arr, int target) {
-        int left = -1;
-        int right = arr.length;
-        // 找到第一个大于等于target的元素，返回索引
-        while (left + 1 != right) {
+    // 给你一个整数 target ，如果 target 在矩阵中，返回 true ；否则，返回 false 。
+    // 找到第一个大于等于target的下标位置，即左边全小于target，右边全大于等于target
+    public boolean binarySearch(int[] nums, int target) {
+        int left = -1, right = nums.length;
+        while (left + 1 < right) {
             int mid = left + (right - left) / 2;
-            if (arr[mid] >= target) right = mid;
-            else left = mid;
+            if (nums[mid] == target) return true;
+            if (nums[mid] < target) left = mid;
+            else right = mid;
         }
-        return right < arr.length && arr[right] == target;
+        return false;
     }
 }
