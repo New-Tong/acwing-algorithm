@@ -1,4 +1,4 @@
-package LeetCode.Hot100.无重复字符的最大子串;
+package LeetCode.Hot100.无重复字符的最长子串;
 
 import java.io.*;
 import java.util.HashSet;
