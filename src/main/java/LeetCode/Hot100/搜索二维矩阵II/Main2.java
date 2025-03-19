@@ -1,4 +1,4 @@
-package LeetCode.搜索二维矩阵II;
+package LeetCode.Hot100.搜索二维矩阵II;
 
 /**
  @Author NewTong
